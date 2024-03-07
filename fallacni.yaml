@@ -1,0 +1,226 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: API de FallaCNI
+  description: API permettant la gestion des Cartes Nationales d'Identité (CNIs), incluant l'ajout, la recherche, l'affichage des CNIs et FAQs, ainsi que la gestion des tokens JWT.
+host: ff-backend.fr:4001
+basePath: /
+schemes:
+  - https
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: "Pour utiliser cette API, insérer le token JWT comme ceci: Bearer {votre token JWT ici}"
+paths:
+  /addCNI:
+    post:
+      summary: Ajoute une nouvelle CNI
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: lname
+          type: string
+          required: true
+          description: Nom de famille
+        - in: formData
+          name: fname
+          type: string
+          required: true
+          description: Prénom
+        - in: formData
+          name: dob
+          type: string
+          format: date
+          required: true
+          description: Date de naissance
+        - in: formData
+          name: photo
+          type: file
+          description: Photo de la CNI
+      responses:
+        200:
+          description: CNI ajoutée avec succès
+        500:
+          description: Erreur serveur
+      security:
+        - Bearer: []
+  /searchCNI:
+    get:
+      summary: Recherche une CNI par nom, prénom, et date de naissance
+      parameters:
+        - in: query
+          name: lname
+          type: string
+          required: true
+          description: Nom de famille
+        - in: query
+          name: fname
+          type: string
+          required: true
+          description: Prénom
+        - in: query
+          name: dob
+          type: string
+          format: date
+          required: true
+          description: Date de naissance
+      responses:
+        200:
+          description: Résultat de la recherche
+        400:
+          description: Paramètres de recherche manquants
+      security:
+        - Bearer: []
+  /declaration:
+    post:
+      summary: Crée une nouvelle déclaration de perte de CNI
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: declaration
+          schema:
+            type: object
+            required:
+              - lastname
+              - firstname
+              - cni_number
+              - dob
+              - city
+              - district
+              - telephone
+              - email
+            properties:
+              lastname:
+                type: string
+              firstname:
+                type: string
+              cni_number:
+                type: string
+              dob:
+                type: string
+                format: date
+              city:
+                type: string
+              district:
+                type: string
+              telephone:
+                type: string
+              email:
+                type: string
+      responses:
+        201:
+          description: Déclaration de perte ajoutée avec succès
+        400:
+          description: Données de la requête invalides
+      security:
+        - Bearer: []
+    get:
+      summary: Obtient toutes les déclarations de perte de CNI
+      responses:
+        200:
+          description: Liste des déclarations de perte de CNI récupérées avec succès
+        500:
+          description: Erreur serveur
+      security:
+        - Bearer: []
+  /get-token:
+    post:
+      summary: Génère un token JWT pour un payload donné
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: payload
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+                additionalProperties: true
+      responses:
+        200:
+          description: Token JWT généré avec succès
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+        400:
+          description: Requête invalide, payload manquant
+        500:
+          description: Erreur serveur
+  /verify-token:
+    post:
+      summary: Vérifie la validité d'un token JWT
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: token
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+      responses:
+        200:
+          description: Le token est valide
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
+              data:
+                type: object
+                additionalProperties: true
+        401:
+          description: Token invalide ou expiré
+  /faq:
+    get:
+      summary: Obtient toutes les FAQs
+      responses:
+        200:
+          description: Liste des FAQs récupérées avec succès
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FAQ'
+        500:
+          description: Erreur serveur
+      security:
+        - Bearer: []
+    post:
+      summary: Ajoute une nouvelle entrée FAQ
+      parameters:
+        - in: body
+          name: faq
+          description: Objet FAQ à ajouter
+          required: true
+          schema:
+            $ref: '#/definitions/FAQ'
+      responses:
+        200:
+          description: FAQ ajoutée avec succès
+        400:
+          description: Données de la requête invalides
+        500:
+          description: Erreur serveur
+      security:
+        - Bearer: []
+definitions:
+  FAQ:
+    type: object
+    required:
+      - title
+      - content
+    properties:
+      title:
+        type: string
+      content:
+        type: string
