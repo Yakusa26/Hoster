@@ -5,7 +5,7 @@
     "title": "API de FallaCNI",
     "description": "API permettant la gestion des Cartes Nationales d'Identité (CNIs), incluant l'ajout, la recherche, l'affichage des CNIs et FAQs, ainsi que la gestion des tokens JWT."
   },
-  "host": "ff-backend.fr:4001",
+  "host": "ff-backend.fr:4000",
   "basePath": "/",
   "schemes": ["https"],
   "securityDefinitions": {
