@@ -25,10 +25,19 @@
         "responses": {
           "200": {
             "description": "Liste des CNIs récupérée avec succès",
-            "schema": {"type": "array","items": {"$ref": "#/definitions/CNI"}}
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CNI"
+              }
+            }
           },
-          "401": {"description": "Non autorisé"},
-          "500": {"description": "Erreur serveur"}
+          "401": {
+            "description": "Non autorisé"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
         }
       }
     },
@@ -37,14 +46,42 @@
         "summary": "Ajoute une nouvelle CNI",
         "consumes": ["multipart/form-data"],
         "parameters": [
-          {"in": "formData","name": "lname","type": "string","required": true,"description": "Nom de famille"},
-          {"in": "formData","name": "fname","type": "string","required": true,"description": "Prénom"},
-          {"in": "formData","name": "dob","type": "string","format": "date","required": true,"description": "Date de naissance"},
-          {"in": "formData","name": "photo","type": "file","description": "Photo de la CNI"}
+          {
+            "in": "formData",
+            "name": "lname",
+            "type": "string",
+            "required": true,
+            "description": "Nom de famille"
+          },
+          {
+            "in": "formData",
+            "name": "fname",
+            "type": "string",
+            "required": true,
+            "description": "Prénom"
+          },
+          {
+            "in": "formData",
+            "name": "dob",
+            "type": "string",
+            "format": "date",
+            "required": true,
+            "description": "Date de naissance"
+          },
+          {
+            "in": "formData",
+            "name": "photo",
+            "type": "file",
+            "description": "Photo de la CNI"
+          }
         ],
         "responses": {
-          "200": {"description": "CNI ajoutée avec succès"},
-          "500": {"description": "Erreur serveur"}
+          "200": {
+            "description": "CNI ajoutée avec succès"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
         },
         "security": [{"Bearer": []}]
       }
@@ -53,13 +90,36 @@
       "get": {
         "summary": "Recherche une CNI par nom, prénom, et date de naissance",
         "parameters": [
-          {"in": "query","name": "lname","type": "string","required": true,"description": "Nom de famille"},
-          {"in": "query","name": "fname","type": "string","required": true,"description": "Prénom"},
-          {"in": "query","name": "dob","type": "string","format": "date","required": true,"description": "Date de naissance"}
+          {
+            "in": "query",
+            "name": "lname",
+            "type": "string",
+            "required": true,
+            "description": "Nom de famille"
+          },
+          {
+            "in": "query",
+            "name": "fname",
+            "type": "string",
+            "required": true,
+            "description": "Prénom"
+          },
+          {
+            "in": "query",
+            "name": "dob",
+            "type": "string",
+            "format": "date",
+            "required": true,
+            "description": "Date de naissance"
+          }
         ],
         "responses": {
-          "200": {"description": "Résultat de la recherche"},
-          "400": {"description": "Paramètres de recherche manquants"}
+          "200": {
+            "description": "Résultat de la recherche"
+          },
+          "400": {
+            "description": "Paramètres de recherche manquants"
+          }
         },
         "security": [{"Bearer": []}]
       }
@@ -74,12 +134,21 @@
             "name": "declaration",
             "schema": {
               "type": "object",
-              "required": ["lastname","firstname","cni_number","dob","city","district","telephone","email"],
+              "required": [
+                "lastname",
+                "firstname",
+                "cni_number",
+                "dob",
+                "city",
+                "district",
+                "telephone",
+                "email"
+              ],
               "properties": {
                 "lastname": {"type": "string"},
                 "firstname": {"type": "string"},
                 "cni_number": {"type": "string"},
-                "dob": {"type": "string","format": "date"},
+                "dob": {"type": "string", "format": "date"},
                 "city": {"type": "string"},
                 "district": {"type": "string"},
                 "telephone": {"type": "string"},
@@ -89,16 +158,24 @@
           }
         ],
         "responses": {
-          "201": {"description": "Déclaration de perte ajoutée avec succès"},
-          "400": {"description": "Données de la requête invalides"}
+          "201": {
+            "description": "Déclaration de perte ajoutée avec succès"
+          },
+          "400": {
+            "description": "Données de la requête invalides"
+          }
         },
         "security": [{"Bearer": []}]
       },
       "get": {
         "summary": "Obtient toutes les déclarations de perte de CNI",
         "responses": {
-          "200": {"description": "Liste des déclarations de perte de CNI récupérées avec succès"},
-          "500": {"description": "Erreur serveur"}
+          "200": {
+            "description": "Liste des déclarations de perte de CNI récupérées avec succès"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
         },
         "security": [{"Bearer": []}]
       }
@@ -111,13 +188,33 @@
           {
             "in": "body",
             "name": "payload",
-            "schema": {"type": "object","properties": {"payload": {"type": "object","additionalProperties": true}}}
+            "schema": {
+              "type": "object",
+              "properties": {
+                "payload": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "200": {"description": "Token JWT généré avec succès","schema": {"type": "object","properties": {"token": {"type": "string"}}}},
-          "400": {"description": "Requête invalide, payload manquant"},
-          "500": {"description": "Erreur serveur"}
+          "200": {
+            "description": "Token JWT généré avec succès",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {"type": "string"}
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide, payload manquant"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
         }
       }
     },
@@ -129,12 +226,32 @@
           {
             "in": "body",
             "name": "token",
-            "schema": {"type": "object","properties": {"token": {"type": "string"}}}
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {"type": "string"}
+              }
+            }
           }
         ],
         "responses": {
-          "200": {"description": "Le token est valide","schema": {"type": "object","properties": {"success": {"type": "boolean"},"message": {"type": "string"},"data": {"type": "object","additionalProperties": true}}}},
-          "401": {"description": "Token invalide ou expiré"}
+          "200": {
+            "description": "Le token est valide",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {"type": "boolean"},
+                "message": {"type": "string"},
+                "data": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token invalide ou expiré"
+          }
         }
       }
     },
@@ -142,8 +259,18 @@
       "get": {
         "summary": "Obtient toutes les FAQs",
         "responses": {
-          "200": {"description": "Liste des FAQs récupérées avec succès","schema": {"type": "array","items": {"$ref": "#/definitions/FAQ"}}},
-          "500": {"description": "Erreur serveur"}
+          "200": {
+            "description": "Liste des FAQs récupérées avec succès",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FAQ"
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
         },
         "security": [{"Bearer": []}]
       },
@@ -155,13 +282,21 @@
             "name": "faq",
             "description": "Objet FAQ à ajouter",
             "required": true,
-            "schema": {"$ref": "#/definitions/FAQ"}
+            "schema": {
+              "$ref": "#/definitions/FAQ"
+            }
           }
         ],
         "responses": {
-          "200": {"description": "FAQ ajoutée avec succès"},
-          "400": {"description": "Données de la requête invalides"},
-          "500": {"description": "Erreur serveur"}
+          "200": {
+            "description": "FAQ ajoutée avec succès"
+          },
+          "400": {
+            "description": "Données de la requête invalides"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
         },
         "security": [{"Bearer": []}]
       }
@@ -170,42 +305,113 @@
   "definitions": {
     "CNI": {
       "type": "object",
-      "required": ["lastname","firstname","cni_number","dob","cni_photo","city","telephone","email"],
+      "required": [
+        "lastname",
+        "firstname",
+        "cni_number",
+        "dob",
+        "cni_photo",
+        "city",
+        "telephone",
+        "email"
+      ],
       "properties": {
-        "_id": {"type": "string","description": "Identifiant unique de l'enregistrement CNI"},
-        "lastname": {"type": "string","description": "Nom de famille de l'individu"},
-        "firstname": {"type": "string","description": "Prénom de l'individu"},
-        "cni_number": {"type": "string","description": "Numéro de la Carte Nationale d'Identité"},
-        "dob": {"type": "string","format": "date","description": "Date de naissance de l'individu au format MM/JJ/AAAA"},
-        "cni_photo": {"type": "string","description": "Nom du fichier de la photo de la CNI ou chemin d'accès à la photo"},
-        "city": {"type": "string","description": "Ville de l'individu"},
-        "district": {"type": "string","description": "Quartier de l'individu"},
-        "telephone": {"type": "string","description": "Numéro de téléphone de l'individu"},
-        "email": {"type": "string","description": "Adresse email de l'individu"},
-        "description": {"type": "string","description": "Description supplémentaire ou remarques concernant l'enregistrement CNI"}
+        "_id": {
+          "type": "string",
+          "description": "Identifiant unique de l'enregistrement CNI"
+        },
+        "lastname": {
+          "type": "string",
+          "description": "Nom de famille de l'individu"
+        },
+        "firstname": {
+          "type": "string",
+          "description": "Prénom de l'individu"
+        },
+        "cni_number": {
+          "type": "string",
+          "description": "Numéro de la Carte Nationale d'Identité"
+        },
+        "dob": {
+          "type": "string",
+          "format": "date",
+          "description": "Date de naissance de l'individu au format MM/JJ/AAAA"
+        },
+        "cni_photo": {
+          "type": "string",
+          "description": "Nom du fichier de la photo de la CNI ou chemin d'accès à la photo"
+        },
+        "city": {
+          "type": "string",
+          "description": "Ville de l'individu"
+        },
+        "district": {
+          "type": "string",
+          "description": "Quartier de l'individu"
+        },
+        "telephone": {
+          "type": "string",
+          "description": "Numéro de téléphone de l'individu"
+        },
+        "email": {
+          "type": "string",
+          "description": "Adresse email de l'individu"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description supplémentaire ou remarques concernant l'enregistrement CNI"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date de création de l'enregistrement"
+        }
       }
     },
     "DeclarationPerte": {
       "type": "object",
-      "required": ["lastname","firstname","cni_number","dob","city","district","telephone","email"],
+      "required": [
+        "lastname",
+        "firstname",
+        "cni_number",
+        "dob",
+        "city",
+        "district",
+        "telephone",
+        "email"
+      ],
       "properties": {
+        "_id": {
+          "type": "string",
+          "description": "Identifiant unique de la déclaration"
+        },
         "lastname": {"type": "string"},
         "firstname": {"type": "string"},
         "cni_number": {"type": "string"},
-        "dob": {"type": "string","format": "date"},
+        "dob": {"type": "string", "format": "date"},
         "city": {"type": "string"},
         "district": {"type": "string"},
         "telephone": {"type": "string"},
-        "email": {"type": "string"}
+        "email": {"type": "string"},
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date de création de la déclaration"
+        }
       }
     },
     "FAQ": {
       "type": "object",
-      "required": ["title","content"],
+      "required": ["title", "content"],
       "properties": {
         "_id": {"type": "string"},
         "title": {"type": "string"},
-        "content": {"type": "string"}
+        "content": {"type": "string"},
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date de création de l'entrée FAQ"
+        }
       }
     }
   }
