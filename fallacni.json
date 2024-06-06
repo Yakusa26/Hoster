@@ -7,7 +7,9 @@
   },
   "host": "ff-backend.fr:4000",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "Bearer": {
       "type": "apiKey",
@@ -21,7 +23,11 @@
       "get": {
         "summary": "Récupère toutes les CNIs",
         "description": "Retourne une liste de toutes les Cartes Nationales d'Identité (CNIs) enregistrées dans la base de données.",
-        "security": [{"Bearer": []}],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Liste des CNIs récupérée avec succès",
@@ -44,7 +50,9 @@
     "/addCNI": {
       "post": {
         "summary": "Ajoute une nouvelle CNI",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "in": "formData",
@@ -83,7 +91,11 @@
             "description": "Erreur serveur"
           }
         },
-        "security": [{"Bearer": []}]
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     },
     "/searchCNI": {
@@ -121,13 +133,19 @@
             "description": "Paramètres de recherche manquants"
           }
         },
-        "security": [{"Bearer": []}]
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     },
     "/declaration": {
       "post": {
         "summary": "Crée une nouvelle déclaration de perte de CNI",
-        "consumes": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -145,14 +163,31 @@
                 "email"
               ],
               "properties": {
-                "lastname": {"type": "string"},
-                "firstname": {"type": "string"},
-                "cni_number": {"type": "string"},
-                "dob": {"type": "string", "format": "date"},
-                "city": {"type": "string"},
-                "district": {"type": "string"},
-                "telephone": {"type": "string"},
-                "email": {"type": "string"}
+                "lastname": {
+                  "type": "string"
+                },
+                "firstname": {
+                  "type": "string"
+                },
+                "cni_number": {
+                  "type": "string"
+                },
+                "dob": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "district": {
+                  "type": "string"
+                },
+                "telephone": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -165,25 +200,41 @@
             "description": "Données de la requête invalides"
           }
         },
-        "security": [{"Bearer": []}]
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       },
       "get": {
         "summary": "Obtient toutes les déclarations de perte de CNI",
         "responses": {
           "200": {
-            "description": "Liste des déclarations de perte de CNI récupérées avec succès"
+            "description": "Liste des déclarations de perte de CNI récupérées avec succès",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeclarationPerte"
+              }
+            }
           },
           "500": {
             "description": "Erreur serveur"
           }
         },
-        "security": [{"Bearer": []}]
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     },
     "/get-token": {
       "post": {
         "summary": "Génère un token JWT pour un payload donné",
-        "consumes": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -205,7 +256,9 @@
             "schema": {
               "type": "object",
               "properties": {
-                "token": {"type": "string"}
+                "token": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -221,7 +274,9 @@
     "/verify-token": {
       "post": {
         "summary": "Vérifie la validité d'un token JWT",
-        "consumes": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -229,7 +284,9 @@
             "schema": {
               "type": "object",
               "properties": {
-                "token": {"type": "string"}
+                "token": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -240,8 +297,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "success": {"type": "boolean"},
-                "message": {"type": "string"},
+                "success": {
+                  "type": "boolean"
+                },
+                "message": {
+                  "type": "string"
+                },
                 "data": {
                   "type": "object",
                   "additionalProperties": true
@@ -272,7 +333,11 @@
             "description": "Erreur serveur"
           }
         },
-        "security": [{"Bearer": []}]
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       },
       "post": {
         "summary": "Ajoute une nouvelle entrée FAQ",
@@ -298,7 +363,11 @@
             "description": "Erreur serveur"
           }
         },
-        "security": [{"Bearer": []}]
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     }
   },
@@ -385,14 +454,31 @@
           "type": "string",
           "description": "Identifiant unique de la déclaration"
         },
-        "lastname": {"type": "string"},
-        "firstname": {"type": "string"},
-        "cni_number": {"type": "string"},
-        "dob": {"type": "string", "format": "date"},
-        "city": {"type": "string"},
-        "district": {"type": "string"},
-        "telephone": {"type": "string"},
-        "email": {"type": "string"},
+        "lastname": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "cni_number": {
+          "type": "string"
+        },
+        "dob": {
+          "type": "string",
+          "format": "date"
+        },
+        "city": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -402,11 +488,20 @@
     },
     "FAQ": {
       "type": "object",
-      "required": ["title", "content"],
+      "required": [
+        "title",
+        "content"
+      ],
       "properties": {
-        "_id": {"type": "string"},
-        "title": {"type": "string"},
-        "content": {"type": "string"},
+        "_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
